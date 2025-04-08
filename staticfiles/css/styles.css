@@ -1,0 +1,52 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#post-field {
+    border-radius: 30px;
+    background-color: white;
+    color: #323232;
+}
+
+#content-creator-panel-field {
+    border-radius: 30px;
+    /*background-color: #fafbfb;*/
+    color: #555d64;
+}
+
+#card-img-top-corners {
+    border-radius: 19px 19px 0 0;
+}
+
+#post-img-corners {
+    border-radius: 16px;
+}
+
+#image_description_text {
+    color: #6d6d6d;
+    font-style: italic;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.cls-color {
+  color: black;
+}
+
+#creator_panel_button {
+    text-align: start;
+    width: 125px;
+}
+
+
+/*.card:hover {*/
+/*    transform: translateY(-5px);*/
+/*    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);*/
+/*    transition: 0.3s;*/
+/*}*/

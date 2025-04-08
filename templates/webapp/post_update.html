@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_filters %}
+
+
+{% block content %}
+
+
+<div class="container">
+
+  <div class="row mt-md-5 mb-md-4 mt-1 mb-3 justify-content-center">
+    <div class="col-auto fs-2 fw-bolder">
+      Edit Post
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+
+    <div class="col-auto mb-4">
+      <div class="card" style="width: 18rem; border-radius: 20px;">
+        <div class="card-body">
+
+          <form method="post" action="{% url 'webapp:post_update' object.id %}" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label class="form-label" for="cover_image">Cover Image:</label>
+              <input class="form-control"  id="cover_image" type="file" name="cover_image" value="{{ form.cover_image.value }}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="cover_title">Cover Title:</label>
+              <input class="form-control" id="cover_title" type="text" name="cover_title" value="{{ form.cover_title.value }}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="cover_description">Cover Description:</label>
+              <input class="form-control" id="cover_description" type="text" name="cover_description" value="{{ form.cover_description.value }}">
+            </div>
+
+            <div class="row justify-content-center mt-4 mb-3">
+
+              <div class="col-auto">
+                <a href="{%  url 'webapp:index' %}" class="btn mx-1 btn-outline-secondary btn-sm rounded-4">Cancel</a>
+              </div>
+
+              <div class="col-auto">
+                <input class="btn mx-1 btn-outline-primary btn-sm rounded-4" type="submit" value="Save">
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}
+
+
+

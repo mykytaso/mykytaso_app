@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_filters %}
+
+
+{% block content %}
+
+  <div class="container">
+
+    <div class="row mt-md-5 mb-md-4 mt-1 mb-3 justify-content-center">
+      <div class="col-auto fs-2 fw-bolder">
+        👋 Hi! I'm Mykyta
+
+        <!-- Create Post Button -->
+        {% if user.is_staff %}
+          &nbsp;<a class="btn btn-link" href="{% url 'webapp:post_create' %}"><i class="bi bi-plus-square-fill h4"></i></a>
+        {% endif %}
+
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+
+    {% for post in object_list %}
+      <div class="col-auto mb-4">
+
+        <!-- Post Card -->
+        <a href="{% url 'webapp:post_detail' post.id %}" class="text-decoration-none">
+          <div class="card" style="width: 18rem; border-radius: 20px;">
+            {% if post.cover_image %}
+              <img id="card-img-top-corners" src="{{ post.cover_image.url }}" class="card-img-top" alt="">
+            {% else %}
+              No image.
+            {% endif %}
+
+            <div class="card-body">
+              <h5 class="card-title text-decoration-none text-dark">{{ post.cover_title }}</h5>
+              <p class="card-text text-decoration-none text-dark">{{ post.cover_description }}</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Editing Buttons -->
+        {% if user.is_staff %}
+          <div class="row justify-content-center p-0 my-2">
+            <div class="col-auto border rounded-5" style="background: white">
+
+              <div class="row py-2 m-0 justify-content-center align-items-center">
+                <form class="col-auto p-0 m-0 pe-3" action="{% url 'webapp:post_change_position' %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="post_position" value="{{ post.position }}">
+                  <input type="hidden" name="position_direction" value="left">
+                  <button type="submit" {% if forloop.first %} disabled {% endif %} class="btn btn-link m-0 p-0"><i class="bi bi-caret-left"></i></button>
+                </form>
+
+                <div class="col-auto p-0 m-0"><a class="px-3" href="{% url 'webapp:post_update' post.id %}"><i class="bi bi-pen"></i></a></div>
+
+                <div class="col-auto p-0 m-0"><a class="px-3" href="{% url 'webapp:post_delete' post.id %}" ><i class="bi bi-trash"></i></a></div>
+
+                <form class="col-auto p-0 m-0 ps-3" action="{% url 'webapp:post_change_position' %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="post_position" value="{{ post.position }}">
+                  <input type="hidden" name="position_direction" value="right">
+                  <button type="submit" {% if forloop.last %} disabled {% endif %} class="btn btn-link m-0 p-0"><i class="bi bi-caret-right"></i></button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+
+    {% endfor %}
+
+    </div>
+
+  </div>
+
+{% endblock %}

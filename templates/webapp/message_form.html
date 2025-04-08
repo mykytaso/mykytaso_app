@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+
+{% block content %}
+  
+  <div class="container">
+
+    {% if messages %}
+
+      {% for message in messages %}
+        <div class="row mt-md-5 mb-md-4 mt-1 mb-3 justify-content-center">
+          <div class="col-auto fs-2 fw-bolder">
+            Got it! Thanks for reaching out 🤘
+          </div>
+        </div>
+      {% endfor %}
+
+    {% else %}
+
+      <div class="row mt-md-5 mb-md-4 mt-1 mb-3 justify-content-center">
+        <div class="col-auto fs-2 fw-bolder">
+          Send Me a Message
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-10 col-md-8 col-lg-6 fw-medium">
+          <form action="" method="post" novalidate>
+            {% csrf_token %}
+            {{ form | crispy}}
+            <div class="text-center my-3 mt-md-5">
+              <button type="submit" class="btn btn-primary rounded-5">
+                <i class="bi bi-send"></i> Send
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    {% endif %}
+
+  </div>
+  
+{% endblock %}

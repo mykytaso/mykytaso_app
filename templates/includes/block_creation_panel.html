@@ -1,0 +1,89 @@
+<div class="row mt-md-3 mb-md-4 mt-2 mb-3 justify-content-center">
+  <div id="content-creator-panel-field" class="col-11 col-md-8 col-lg-8 px-4 px-lg-5 py-3 border">
+
+    <h5 class="fw-bold text-center my-3"><i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Block Creation Panel</h5>
+
+    <!-- Text Form -->
+    <form class="row py-3 px-0 align-items-center" method="post" action="{% url 'webapp:block_create' post.id %}">
+
+      {% csrf_token %}
+      <div class="col-auto m-0 px-2">
+        <select class="form-select rounded-5" aria-label="select_text_alignment" name="text_alignment">
+          <option value="text-start">Left</option>
+          <option value="text-center">Center</option>
+          <option value="text-end">Right</option>
+        </select>
+      </div>
+
+      <div class="col-auto m-0 px-2">
+        <select class="form-select rounded-5" aria-label="select_text_type" name="text_type">
+          <option value="normal_text">Normal</option>
+          <option value="image_description_text">Light</option>
+        </select>
+      </div>
+
+      <div class="col m-0 px-2">
+        <div class="input-group">
+          <input class="form-control rounded-start-5" aria-label="text" name="text" placeholder="" required>
+          <button id="creator_panel_button" type="submit" class="btn btn-outline-primary rounded-end-5" ><i class="bi bi-file-text"></i> Add Text</button>
+        </div>
+      </div>
+
+    </form>
+
+    <!-- Image Form -->
+    <form class="row py-3 px-0 align-items-center" method="post" action="{% url 'webapp:block_create' post.id %}" enctype="multipart/form-data">
+
+      {% csrf_token %}
+      <div class="col-auto m-0 px-2">
+        <select class="form-select rounded-5" aria-label="select_image_alignment" name="image_alignment">
+          <option value="text-center">Center</option>
+          <option value="text-start">Left</option>
+          <option value="text-end">Right</option>
+        </select>
+      </div>
+
+      <div class="col-auto m-0 px-2">
+        <select class="form-select rounded-5" aria-label="select_image_size" name="image_size">
+          <option value="100">100%</option>
+          <option value="75">75%</option>
+          <option value="50">50%</option>
+          <option value="25">25%</option>
+        </select>
+      </div>
+
+      <div class="col m-0 px-2">
+        <div class="input-group">
+          <input type="file" class="form-control rounded-start-5" aria-label="upload_image" name="image" required>
+          <button id="creator_panel_button" class="btn btn-outline-primary rounded-end-5" type="submit"><i class="bi bi-file-image"></i> Add Image</button>
+        </div>
+      </div>
+
+    </form>
+
+    <!-- Space Form -->
+    <form class="row py-3 px-0 align-items-center justify-content-end" method="post" action="{% url 'webapp:block_create' post.id %}">
+      {% csrf_token %}
+      <div class="col-auto m-0 px-2">
+        <div class="input-group">
+
+          <input type="number"
+                 class="form-control rounded-start-5"
+                 id="add-space"
+                 name="space_number"
+                 placeholder="16"
+                 value="16"
+                 min="1"
+                 max="100"
+                 step="1"
+                 aria-label="space_number"
+                 required>
+          <span class="input-group-text">px</span>
+          <button id="creator_panel_button" class="btn btn-outline-primary rounded-end-5" type="submit"><i class="bi bi-file"></i> Add Space</button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,61 @@
+{% load static %}
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="container">
+
+    <!-- Toggler for smaller screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      {% with request.resolver_match.url_name as url_name %}
+        <ul class="navbar-nav mx-auto test-sm-center">
+
+          <li class="nav-item">
+            <a class="btn btn-outline-primary btn-sm rounded-4 mx-2 mt-3 {% if url_name == "index" %}active{% endif %}" href="{% url 'webapp:index' %}" role="button">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="btn btn-outline-primary btn-sm rounded-4 mx-2 mt-3 {% if url_name == "about_me" %}active{% endif %}" href="{% url 'webapp:about_me' %}" role="button">About me</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="btn btn-outline-primary btn-sm rounded-4 mx-2 mt-3 {% if url_name == "resume" %}active{% endif %}" href="{% url 'webapp:resume' %}" role="button">Resume</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="btn btn-outline-primary btn-sm rounded-4 mx-2 mt-3 {% if url_name == "send_message" %}active{% endif %}" href="{% url 'webapp:send_message' %}" role="button">Send message</a>
+          </li>
+
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+
+              <form method="post" action="{% url 'users:logout' %}">
+                {% csrf_token %}
+                <span class="input-group">
+                  <a class="btn btn-outline-primary btn-sm rounded-start-4 ms-2 mt-3 {% if url_name == "user-detail" %}active{% endif %}" href="{% url 'users:user-detail' %}" role="button"><i class="bi bi-person-fill"></i></a>
+                  <button type="submit" class="btn btn-outline-primary btn-sm rounded-end-4 me-2 mt-3 ">Logout</button>
+                </span>
+              </form>
+
+            {% else %}
+
+              <span class="input-group">
+                <a class="btn btn-outline-primary btn-sm rounded-start-4 ms-2 mt-3 {% if url_name == "login" %}active{% endif %}" href="{% url 'users:login' %}" role="button">Login</a>
+                <a class="btn btn-outline-primary btn-sm rounded-end-4 me-2 mt-3 {% if url_name == "register" %}active{% endif %}" href="{% url 'users:register' %}" role="button">Register</a>
+              </span>
+
+            {% endif %}
+          </li>
+
+        </ul>
+      {% endwith %}
+
+    </div>
+
+  </div>
+</nav>

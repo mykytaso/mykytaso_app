@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <div class="container">
+
+    <div class="row mt-md-5 mb-md-4 mt-1 mb-3 justify-content-center">
+      <div class="col-auto fs-2 fw-bolder">
+        User
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-10 col-sm-8 col-md-7 col-lg-6 col-xl-5 col-xxl-4 fw-medium text-center">
+
+      {{ user.email }}
+
+      </div>
+    </div>
+
+  </div>
+{% endblock %}
