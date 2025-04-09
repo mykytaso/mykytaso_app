@@ -7,6 +7,7 @@ from django.core.files.storage import default_storage
 from django.db import models
 from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
+from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
 
 from webapp.helpers.telegram import send_telegram_message
@@ -119,55 +120,27 @@ class Block(models.Model):
 @receiver(post_delete, sender=Post)
 def delete_post_cover_image(sender, instance, **kwargs):
     """
-    Deletes cover image and its folder from filesystem when corresponding `Post` object is deleted.
+    Deletes the cover image from storage when the `Post` object is deleted.
     """
-    # if instance.cover_image and instance.cover_image.name:
-    #     image_path = instance.cover_image.path
-    #     image_dir = os.path.dirname(image_path)
-    #     if os.path.isfile(image_path):
-    #         os.remove(image_path)
-    #     # Remove the directory if it is empty
-    #     if os.path.isdir(image_dir) and not os.listdir(image_dir):
-    #         os.rmdir(image_dir)
-    storage = default_storage
-    storage.delete(instance.cover_image.name)
+
+    if instance.cover_image and instance.cover_image.name:
+        if default_storage.exists(instance.cover_image.name):
+            default_storage.delete(instance.cover_image.name)
 
 
 @receiver(pre_save, sender=Post)
 def delete_post_cover_image_on_update(sender, instance, **kwargs):
     """
-    Deletes old cover image from filesystem when the `Post` object is updated.
+    Deletes the old cover image from storage when the `Post` object is updated.
     """
-    # # Check if the object exists in the database (old instance)
-    # if instance.pk:
-    #     try:
-    #         old_instance = Post.objects.get(pk=instance.pk)
-    #     except Post.DoesNotExist:
-    #         return
-    #
-    #     # Check if the cover image has changed
-    #     if (
-    #         old_instance.cover_image
-    #         and old_instance.cover_image != instance.cover_image
-    #     ):
-    #         old_image_path = old_instance.cover_image.path
-    #         old_image_dir = os.path.dirname(old_image_path)
-    #
-    #         if os.path.isfile(old_image_path):
-    #             os.remove(old_image_path)
-    #
-    #         # Remove the directory if it is empty
-    #         if os.path.isdir(old_image_dir) and not os.listdir(old_image_dir):
-    #             os.rmdir(old_image_dir)
-
     # Check if the object exists in the database (old instance)
     if instance.pk:
-        try:
-            old_instance = Post.objects.get(pk=instance.pk)
-        except Post.DoesNotExist:
-            return
+        old_instance = get_object_or_404(Post, instance.pk)
 
-        if old_instance.cover_image and old_instance.cover_image != instance.cover_image:
+        if (
+            old_instance.cover_image
+            and old_instance.cover_image != instance.cover_image
+        ):
             # Delete the old image from the storage (S3)
             if default_storage.exists(old_instance.cover_image.name):
                 default_storage.delete(old_instance.cover_image.name)
@@ -176,16 +149,11 @@ def delete_post_cover_image_on_update(sender, instance, **kwargs):
 @receiver(post_delete, sender=Image)
 def delete_block_image(sender, instance, **kwargs):
     """
-    Deletes post content image and its folder from filesystem when corresponding content object is deleted.
+    Deletes the image file from storage when the `Image` object is deleted.
     """
     if instance.image and instance.image.name:
-        image_path = instance.image.path
-        image_dir = os.path.dirname(image_path)
-        if os.path.isfile(image_path):
-            os.remove(image_path)
-        # Remove the directory if it is empty
-        if os.path.isdir(image_dir) and not os.listdir(image_dir):
-            os.rmdir(image_dir)
+        if default_storage.exists(instance.image.name):
+            default_storage.delete(instance.image.name)
 
 
 @receiver(post_save, sender=Message)
