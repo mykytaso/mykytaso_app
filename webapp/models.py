@@ -138,6 +138,28 @@ def delete_post_cover_image_on_update(sender, instance, **kwargs):
     """
     Deletes old cover image from filesystem when the `Post` object is updated.
     """
+    # # Check if the object exists in the database (old instance)
+    # if instance.pk:
+    #     try:
+    #         old_instance = Post.objects.get(pk=instance.pk)
+    #     except Post.DoesNotExist:
+    #         return
+    #
+    #     # Check if the cover image has changed
+    #     if (
+    #         old_instance.cover_image
+    #         and old_instance.cover_image != instance.cover_image
+    #     ):
+    #         old_image_path = old_instance.cover_image.path
+    #         old_image_dir = os.path.dirname(old_image_path)
+    #
+    #         if os.path.isfile(old_image_path):
+    #             os.remove(old_image_path)
+    #
+    #         # Remove the directory if it is empty
+    #         if os.path.isdir(old_image_dir) and not os.listdir(old_image_dir):
+    #             os.rmdir(old_image_dir)
+
     # Check if the object exists in the database (old instance)
     if instance.pk:
         try:
@@ -145,20 +167,10 @@ def delete_post_cover_image_on_update(sender, instance, **kwargs):
         except Post.DoesNotExist:
             return
 
-        # Check if the cover image has changed
-        if (
-            old_instance.cover_image
-            and old_instance.cover_image != instance.cover_image
-        ):
-            old_image_path = old_instance.cover_image.path
-            old_image_dir = os.path.dirname(old_image_path)
-
-            if os.path.isfile(old_image_path):
-                os.remove(old_image_path)
-
-            # Remove the directory if it is empty
-            if os.path.isdir(old_image_dir) and not os.listdir(old_image_dir):
-                os.rmdir(old_image_dir)
+        if old_instance.cover_image and old_instance.cover_image != instance.cover_image:
+            # Delete the old image from the storage (S3)
+            if default_storage.exists(old_instance.cover_image.name):
+                default_storage.delete(old_instance.cover_image.name)
 
 
 @receiver(post_delete, sender=Image)
