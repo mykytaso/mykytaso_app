@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "crispy_forms",
     "crispy_bootstrap5",
+    "storages",
     "webapp",
     "users",
 ]
@@ -111,12 +112,19 @@ USE_TZ = True
 
 
 STATIC_URL = "/static/"
-# STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / "staticfiles"]  # local development
+STATIC_ROOT = BASE_DIR / "staticfiles" # for production
+# STATICFILES_DIRS = [BASE_DIR / "staticfiles"]  # local development
 
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = BASE_DIR / "media"
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# S3 Bucket for media files
+DEFAULT_FILE_STORAGE = os.getenv("DEFAULT_FILE_STORAGE")
+AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
+MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/"
