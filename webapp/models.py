@@ -23,11 +23,10 @@ class Message(models.Model):
         return f"{self.email}: {self.content}"
 
 
-# def post_cover_image_path(instance: "Post", filename: str) -> str:
-#     # return (
-#     #     pathlib.Path("posts/") / slugify(instance.cover_title) / pathlib.Path(filename)
-#     # )
-#     return "posts/"
+def post_cover_image_path(instance: "Post", filename: str) -> str:
+    return (
+        pathlib.Path("posts/") / slugify(instance.cover_title) / pathlib.Path(filename)
+    )
 
 
 def block_image_path(instance: "Image", filename: str) -> pathlib.Path:
@@ -43,7 +42,7 @@ class Post(models.Model):
     cover_title = models.CharField(max_length=100)
     cover_description = models.TextField()
     cover_image = models.ImageField(
-        upload_to="posts/", blank=True, null=True
+        upload_to=post_cover_image_path, blank=True, null=True
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
