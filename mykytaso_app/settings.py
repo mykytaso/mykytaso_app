@@ -124,7 +124,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # S3 Bucket for media files
-DEFAULT_FILE_STORAGE = os.getenv("DEFAULT_FILE_STORAGE")
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
-AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
-MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/"
+
+# AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
+# MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/"
