@@ -126,9 +126,9 @@ STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
     },
-    # "staticfiles": {
-    #     "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-    # },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
 }
 
 AWS_S3_ACCESS_KEY_ID = os.getenv("AWS_S3_ACCESS_KEY_ID")
