@@ -23,10 +23,11 @@ class Message(models.Model):
         return f"{self.email}: {self.content}"
 
 
-def post_cover_image_path(instance: "Post", filename: str) -> pathlib.Path:
-    return (
-        pathlib.Path("posts/") / slugify(instance.cover_title) / pathlib.Path(filename)
-    )
+def post_cover_image_path(instance: "Post", filename: str) -> str:
+    # return (
+    #     pathlib.Path("posts/") / slugify(instance.cover_title) / pathlib.Path(filename)
+    # )
+    return "posts/"
 
 
 def block_image_path(instance: "Image", filename: str) -> pathlib.Path:
