@@ -3,6 +3,7 @@ import pathlib
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.core.files.storage import default_storage
 from django.db import models
 from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
@@ -115,19 +116,21 @@ class Block(models.Model):
         ordering = ["post", "block_position"]
 
 
-# @receiver(post_delete, sender=Post)
-# def delete_post_cover_image(sender, instance, **kwargs):
-#     """
-#     Deletes cover image and its folder from filesystem when corresponding `Post` object is deleted.
-#     """
-#     if instance.cover_image and instance.cover_image.name:
-#         image_path = instance.cover_image.path
-#         image_dir = os.path.dirname(image_path)
-#         if os.path.isfile(image_path):
-#             os.remove(image_path)
-#         # Remove the directory if it is empty
-#         if os.path.isdir(image_dir) and not os.listdir(image_dir):
-#             os.rmdir(image_dir)
+@receiver(post_delete, sender=Post)
+def delete_post_cover_image(sender, instance, **kwargs):
+    """
+    Deletes cover image and its folder from filesystem when corresponding `Post` object is deleted.
+    """
+    # if instance.cover_image and instance.cover_image.name:
+    #     image_path = instance.cover_image.path
+    #     image_dir = os.path.dirname(image_path)
+    #     if os.path.isfile(image_path):
+    #         os.remove(image_path)
+    #     # Remove the directory if it is empty
+    #     if os.path.isdir(image_dir) and not os.listdir(image_dir):
+    #         os.rmdir(image_dir)
+    storage = default_storage
+    storage.delete(instance.cover_image.name)
 
 
 @receiver(pre_save, sender=Post)
