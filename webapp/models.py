@@ -1,4 +1,3 @@
-import os
 import pathlib
 from random import randrange
 
@@ -31,9 +30,9 @@ def post_cover_image_path(instance: "Post", filename: str) -> str:
     file_ext = pathlib.Path(filename).suffix
     random_part = str(randrange(10**8)).zfill(8)
     return (
-            pathlib.Path("posts/")
-            / slugify(instance.cover_title)
-            / pathlib.Path(f"{file_name}_{random_part}{file_ext}")
+        pathlib.Path("posts/")
+        / slugify(instance.cover_title)
+        / pathlib.Path(f"{file_name}_{random_part}{file_ext}")
     )
 
 
