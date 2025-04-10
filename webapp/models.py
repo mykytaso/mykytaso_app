@@ -144,7 +144,7 @@ def delete_post_cover_image_on_update(sender, instance, **kwargs):
     """
     # Check if the object exists in the database (old instance)
     if instance.pk:
-        old_instance = get_object_or_404(Post, id=instance.pk)
+        old_instance = get_object_or_404(Post, pk=instance.pk)
 
         if (
             old_instance.cover_image
