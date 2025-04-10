@@ -112,7 +112,7 @@ USE_TZ = True
 
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles" # for production
+STATIC_ROOT = BASE_DIR / "staticfiles"  # for production
 # STATICFILES_DIRS = [BASE_DIR / "staticfiles"]  # local development
 
 # MEDIA_URL = "/media/"
@@ -135,3 +135,9 @@ AWS_S3_ACCESS_KEY_ID = os.getenv("AWS_S3_ACCESS_KEY_ID")
 AWS_S3_SECRET_ACCESS_KEY = os.getenv("AWS_S3_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
+
+# AWS Cloud Front settings
+AWS_S3_CUSTOM_DOMAIN = os.getenv("AWS_S3_CUSTOM_DOMAIN")
+AWS_QUERYSTRING_EXPIRE = int(os.getenv("AWS_QUERYSTRING_EXPIRE"))
+AWS_CLOUDFRONT_KEY_ID = os.getenv("AWS_CLOUDFRONT_KEY_ID")
+AWS_CLOUDFRONT_KEY = os.getenv("AWS_CLOUDFRONT_KEY")
