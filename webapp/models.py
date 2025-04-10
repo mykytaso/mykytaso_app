@@ -1,5 +1,6 @@
 import os
 import pathlib
+from random import randrange
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -26,16 +27,24 @@ class Message(models.Model):
 
 
 def post_cover_image_path(instance: "Post", filename: str) -> str:
+    file_name = pathlib.Path(filename).stem
+    file_ext = pathlib.Path(filename).suffix
+    random_part = str(randrange(10**8)).zfill(8)
     return (
-        pathlib.Path("posts/") / slugify(instance.cover_title) / pathlib.Path(filename)
+            pathlib.Path("posts/")
+            / slugify(instance.cover_title)
+            / pathlib.Path(f"{file_name}_{random_part}{file_ext}")
     )
 
 
 def block_image_path(instance: "Image", filename: str) -> pathlib.Path:
+    file_name = pathlib.Path(filename).stem
+    file_ext = pathlib.Path(filename).suffix
+    random_part = str(randrange(10**8)).zfill(8)
     return (
         pathlib.Path("posts/")
         / slugify(instance.post.cover_title)
-        / pathlib.Path(filename)
+        / pathlib.Path(f"{file_name}_{random_part}{file_ext}")
     )
 
 
