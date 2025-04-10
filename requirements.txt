@@ -2,8 +2,10 @@ asgiref==3.8.1
 boto3==1.37.30
 botocore==1.37.30
 certifi==2025.1.31
+cffi==1.17.1
 charset-normalizer==3.4.1
 crispy-bootstrap5==2025.4
+cryptography==44.0.2
 Django==5.2
 django-crispy-forms==2.3
 django-storages==1.14.6
@@ -15,6 +17,7 @@ packaging==24.2
 pillow==11.1.0
 psycopg==3.2.6
 psycopg-binary==3.2.6
+pycparser==2.22
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.0
 requests==2.32.3
