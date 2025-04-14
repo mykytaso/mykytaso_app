@@ -1,0 +1,11 @@
+<div class="row justify-content-center">
+  <div  class="col-11 col-md-8 col-lg-8 px-4 px-lg-5 pt-3 pt-lg-4 mb-5 mt-2 mt-md-3 rounded-5 border">
+    <form class="row justify-content-center" method="post" action="{% url 'webapp:comment_create' post.id %}">
+      {% csrf_token %}
+      <textarea class="col form-control m-0 rounded-4" name="comment_content" aria-label="comment" rows="4" placeholder="Write a comment..." required></textarea>
+      <div class="row justify-content-center">
+        <button type="submit" class="col-auto btn btn-primary my-3 rounded-5">Comment</button>
+      </div>
+    </form>
+  </div>
+</div>
