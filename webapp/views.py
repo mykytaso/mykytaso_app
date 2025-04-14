@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.aggregates import Max
 from django.http import HttpResponseForbidden, HttpResponseBadRequest
@@ -8,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic, View
 
 from webapp.forms import MessageForm
-from webapp.models import Message, Post, Text, Block, Image, Space, Tag
+from webapp.models import Message, Post, Text, Block, Image, Space, Tag, Comment
 
 
 class SuperuserRequiredMixin:
@@ -217,6 +218,29 @@ class TagDeleteView(SuperuserRequiredMixin, View):
         Tag.objects.filter(id=tag_id).delete()
 
         return redirect("webapp:post_detail", pk=pk)
+
+
+class CommentCreateView(View):
+    def post(self, request, pk):
+        post = get_object_or_404(Post, pk=pk)
+        current_user = request.user
+        comment_content = request.POST.get("comment_content")
+
+        Comment.objects.create(post=post, author=current_user, content=comment_content)
+
+        return redirect("webapp:post_detail", pk=pk)
+
+
+class CommentDeleteView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        comment_id = request.POST.get("comment_id")
+        comment = get_object_or_404(Comment, id=comment_id)
+
+        if request.user == comment.author or request.user.is_superuser:
+            comment.delete()
+            return redirect("webapp:post_detail", pk=pk)
+        else:
+            return HttpResponseForbidden(_("You do not have permission to delete this comment."))
 
 
 class AboutMeView(generic.TemplateView):
