@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load custom_filters %}
+
 
 {% block content %}
 
@@ -54,8 +56,8 @@
       </div>
     {% endif %}
 
-    <div class="row mt-md-3 mb-md-4 mt-2 mb-3 justify-content-center">
-      <div id="post-field" class="col-11 col-md-8 col-lg-8 p-4 p-lg-5 border">
+      <div class="row mt-md-3 mb-md-4 mt-2 mb-3 justify-content-center">
+        <div id="post-field" class="col-11 col-md-8 col-lg-8 p-4 p-lg-5 border">
 
         {% for block in post.blocks.all %}
           <div class="row {%  if user.is_staff %}border-bottom{% endif %}">
@@ -120,8 +122,71 @@
       </div>
     </div>
 
+    <!-- Block Creation Panel -->
     {%  if user.is_staff %}
       {% include "includes/block_creation_panel.html" %}
+    {% endif %}
+
+    <!-- Render Comments -->
+    <div class="row justify-content-center">
+      <div class="col-auto mt-3 fs-4 fw-bolder text-center">
+        {% if post.comments.all %}
+          Comments
+        {% else %}
+          <span class="fs-5 fw-light text-secondary">There are no comments yet</span><br>
+        {% endif %}
+      </div>
+    </div>
+
+    {% for comment in post.comments.all %}
+      <div class="row mt-2 mt-md-3 mb-3 mb-md-4 justify-content-center">
+        <div id="post-field" class="col-11 col-md-8 col-lg-8 p-4 p-lg-5 border">
+
+          <div class="row justify-content-between align-items-center">
+
+            <div class="col-auto mb-2">
+              <span class="fw-bold">
+                <i class="bi bi-person-fill"></i>
+                {{ comment.author.email | email_username }}&nbsp; &nbsp;
+              </span>
+              <span class="text-secondary fw-light">
+                {{ comment.created_at|date:"d M Y" }}
+                {{ comment.created_at|time:"H:i" }}
+              </span>
+            </div>
+
+            <!-- Delete Button -->
+            {%  if user.is_staff or user == comment.author %}
+            <div class="col-auto text-end">
+                <div class="row justify-content-end m-0 p-0">
+                  <div class="col-auto m-0 p-0">
+                    <form action="{% url 'webapp:comment_delete' post.id %}" method="post" class="d-inline m-0 p-0">
+                      {% csrf_token %}
+                      <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                      <button type="submit" class="btn btn-link p-0 m-0"><i class="bi bi-x-circle"></i></button>
+                    </form>
+                  </div>
+                </div>
+            </div>
+            {% endif %}
+          </div>
+
+          {{ comment.content }}
+
+        </div>
+
+      </div>
+    {% endfor %}
+
+    <!-- Comment Form -->
+    {% if user.is_authenticated %}
+      {% include "includes/comment_form.html" %}
+    {% else %}
+      <div class="row justify-content-center">
+        <div  class="col-auto mt-0 mb-5">
+          <a class="btn btn-outline-primary rounded-5 ms-2 mt-3 " href="{% url 'users:login' %}" role="button">Login to comment</a>
+        </div>
+      </div>
     {% endif %}
 
   </div>
