@@ -1,8 +1,11 @@
+from datetime import timedelta
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser, UserManager as DjangoUserManager
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.timezone import now
 from django.utils.translation import gettext as _
 
 from webapp.helpers.telegram import send_telegram_message
@@ -53,4 +56,6 @@ class User(AbstractUser):
 @receiver(post_save, sender=get_user_model())
 def create_family_for_user(sender, instance, created, **kwargs):
     if created:
-        send_telegram_message(f"👽 New user: {instance.email} has been registered.")
+        send_telegram_message(
+            f"<b>New User</b>\n⏱️{(now() - timedelta(hours=4)).strftime('%Y-%m-%d %H:%M:%S')}\n👽{instance.email}"
+        )
