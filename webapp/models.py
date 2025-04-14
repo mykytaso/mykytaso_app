@@ -1,4 +1,5 @@
 import pathlib
+from datetime import timedelta
 from random import randrange
 
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -10,6 +11,7 @@ from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
 
+from mykytaso_app import settings
 from webapp.helpers.telegram import send_telegram_message
 
 
@@ -125,6 +127,19 @@ class Block(models.Model):
         ordering = ["post", "block_position"]
 
 
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_at"]
+
+    def __str__(self):
+        return f"{self.author}: {self.content}"
+
+
 @receiver(post_delete, sender=Post)
 def delete_post_cover_image(sender, instance, **kwargs):
     """
@@ -171,5 +186,18 @@ def new_message_created(sender, instance, created, **kwargs):
     """
     if created:
         send_telegram_message(
-            f"⏱️ {instance.created_at.strftime('%Y-%m-%d %H:%M:%S')}\n📧 {instance.email}\n✍ {instance.content}"
+            f"<b>New Message</b>\n⏱️ {(instance.created_at - timedelta(hours=4)).strftime('%Y-%m-%d %H:%M:%S')}\n"
+            f"📧 {instance.email}\n✍ {instance.content}"
+        )
+
+
+@receiver(post_save, sender=Comment)
+def new_comment_created(sender, instance, created, **kwargs):
+    """
+    Sends a Telegram message when a new `Comment` object is created.
+    """
+    if created:
+        send_telegram_message(
+            f"<b>New Comment</b>\n⏱️ {(instance.created_at - timedelta(hours=4)).strftime('%Y-%m-%d %H:%M:%S')}\n"
+            f"📧 {instance.author.email}\n🚀{instance.post.cover_title}\n✍ {instance.content}"
         )
