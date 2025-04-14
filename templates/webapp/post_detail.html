@@ -150,8 +150,8 @@
                 {{ comment.author.email | email_username }}&nbsp; &nbsp;
               </span>
               <span class="text-secondary fw-light">
-                {{ comment.created_at|date:"d M Y" }}
-                {{ comment.created_at|time:"H:i" }}
+                {{ comment.created_at|minus_hours:4|date:"d M Y" }} at
+                {{ comment.created_at|minus_hours:4|date:"H:i" }}
               </span>
             </div>
 
