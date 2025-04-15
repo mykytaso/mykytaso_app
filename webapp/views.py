@@ -23,6 +23,17 @@ class SuperuserRequiredMixin:
         return super().dispatch(request, *args, **kwargs)
 
 
+class LoginRequiredCustomMixin:
+    """Mixin to restrict access to logged-in users only."""
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden(
+                _("Forbidden: You do not have permission to access this page.")
+            )
+        return super().dispatch(request, *args, **kwargs)
+
+
 class PostListView(generic.ListView):
     model = Post
     template_name = "webapp/index.html"
@@ -53,7 +64,9 @@ class PostChangePositionView(SuperuserRequiredMixin, View):
         position_direction = request.POST.get("position_direction")
 
         if not post_position or not position_direction:
-            return HttpResponseBadRequest("Both 'post_position' and 'position_direction' are required.")
+            return HttpResponseBadRequest(
+                "Both 'post_position' and 'position_direction' are required."
+            )
 
         post = get_object_or_404(Post, position=post_position)
 
@@ -220,18 +233,21 @@ class TagDeleteView(SuperuserRequiredMixin, View):
         return redirect("webapp:post_detail", pk=pk)
 
 
-class CommentCreateView(View):
+class CommentCreateView(LoginRequiredCustomMixin, View):
     def post(self, request, pk):
         post = get_object_or_404(Post, pk=pk)
         current_user = request.user
         comment_content = request.POST.get("comment_content")
+
+        if not comment_content:
+            return HttpResponseBadRequest("Comment content is required.")
 
         Comment.objects.create(post=post, author=current_user, content=comment_content)
 
         return redirect("webapp:post_detail", pk=pk)
 
 
-class CommentDeleteView(LoginRequiredMixin, View):
+class CommentDeleteView(LoginRequiredCustomMixin, View):
     def post(self, request, pk):
         comment_id = request.POST.get("comment_id")
         comment = get_object_or_404(Comment, id=comment_id)
@@ -240,7 +256,9 @@ class CommentDeleteView(LoginRequiredMixin, View):
             comment.delete()
             return redirect("webapp:post_detail", pk=pk)
         else:
-            return HttpResponseForbidden(_("You do not have permission to delete this comment."))
+            return HttpResponseForbidden(
+                _("You do not have permission to delete this comment.")
+            )
 
 
 class AboutMeView(generic.TemplateView):
