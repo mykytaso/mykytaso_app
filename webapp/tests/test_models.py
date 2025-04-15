@@ -1,7 +1,15 @@
 from django.db.models import Max
 from django.test import TestCase
 
-from webapp.models import Post, Image, Tag, Text, Space, ContentType, Block
+from users.models import User
+from webapp.models import Post, Image, Tag, Text, Space, ContentType, Block, Comment
+
+
+USER_EMAIL = "test_user@test.com"
+USER_PASSWORD = "test_dffhsf232iife87"
+
+SUPERUSER_EMAIL = "test_superuser@test.com"
+SUPERUSER_PASSWORD = "test_sdff3987r3uifss"
 
 
 class TestModels(TestCase):
@@ -144,3 +152,36 @@ class TestModels(TestCase):
         self.assertEqual(post_contents[0].content_object, self.image)
         self.assertEqual(post_contents[1].content_object, self.text)
         self.assertEqual(post_contents[2].content_object, self.space)
+
+    def test_comment_creation(self):
+        """Test creating a comment instance."""
+        user = User.objects.create_user(
+            email=USER_EMAIL,
+            password=USER_PASSWORD,
+        )
+
+        comment = Comment.objects.create(
+            post=self.post,
+            author=user,
+            content="Test Content",
+        )
+        self.assertEqual(comment.post, self.post)
+        self.assertEqual(comment.author, user)
+        self.assertEqual(comment.content, "Test Content")
+        self.assertIsInstance(comment, Comment)
+
+    def test_comment_str(self):
+        """Test the string representation of Comment."""
+
+        user = User.objects.create_user(
+            email=USER_EMAIL,
+            password=USER_PASSWORD,
+        )
+
+        comment = Comment.objects.create(
+            post=self.post,
+            author=user,
+            content="Test Content",
+        )
+        expected_str = f"{USER_EMAIL}: Test Content"
+        self.assertEqual(str(comment), expected_str)
