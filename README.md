@@ -27,6 +27,7 @@ The application is fully deployed on AWS using the following services:
 
 ## SSL/TLS (HTTPS)
 Secure HTTPS is enabled using SSL/TLS certificates provided by Let’s Encrypt, managed via Certbot.
+
 <img src="docs/images/ssl.png" alt="SSL TLS" width="400"/>
 
 
@@ -34,6 +35,7 @@ Secure HTTPS is enabled using SSL/TLS certificates provided by Let’s Encrypt, 
 
 ## Unit and Integration Testing
 The project achieves 94% test coverage, ensuring strong code reliability and stability.
+
 <img src="docs/images/test_coverage.png" alt="Unit and Integration Testing" width="400"/>
 
 
@@ -41,23 +43,26 @@ The project achieves 94% test coverage, ensuring strong code reliability and sta
 
 ## Telegram Notification Bot
 The application features a Telegram bot that sends notifications for various events, including new messages, user registrations, and new comments on posts.
-![Telegram Bot](/docs/images/telegram_bot.png)
 
+<img src="docs/images/telegram.png" alt="Telegram Bot" width="200"/>
 
 
 ## Registration and Login
 Registration is email-based, and only registered users can comment on posts.
+
 <img src="docs/images/logit_register.png" alt="Login Register" width="600"/>
 
 
 
 ### Posts List Page (Homepage)
 View for anonymous or authenticated users (not superusers).
+
 <img src="docs/images/homepage_anonymous.png" alt="Homepage Anonymous" width="600"/>
 
 Superusers have access to extra features on the Posts List Page:
 - A `+` button to create a new post.
 - A small tool panel under each post with `arrows buttons` to move it, an `edit button`, and a `delete button`.
+
 <img src="docs/images/homepage_super_user.png" alt="Homepage Superuser" width="600"/>
 
 
