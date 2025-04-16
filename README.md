@@ -1,11 +1,21 @@
-# mykytaso.com
+# 👾 mykytaso.com
 
 
-## My website (Django application)
+## My personal website — built with Django and deployed on AWS.
 
-A full-featured blog-style web application built with Django.
+A blog-style web application built with Django.
 It supports user registration, post creation via content blocks, commenting, and real-time Telegram notifications.
 The app is fully deployed on AWS and optimized for performance, security, and maintainability.
+
+<br>
+
+
+## Frontend Technologies
+
+- **HTML**
+- **CSS**
+- **Bootstrap 5.3** – for responsive design and UI components
+- **Django Template Language (DTL)** – for rendering dynamic server-side content
 
 <br>
 
@@ -20,17 +30,8 @@ The application is fully deployed on AWS using the following services:
 
 <br>
 
-## Frontend Technologies
-
-- **HTML**
-- **CSS**
-- **Bootstrap 5.3** – for responsive design and UI components
-- **Django Template Language (DTL)** – for rendering dynamic server-side content
-
-<br>
-
 ## SSL/TLS (HTTPS)
-Secure HTTPS is enabled using SSL/TLS certificates provided by Let’s Encrypt, managed via Certbot.
+Secure HTTPS is enabled using SSL/TLS certificates provided by `Let’s Encrypt`, managed via `Certbot`.
 
 <img src="docs/images/ssl.png" alt="SSL TLS" width="400"/>
 
@@ -67,12 +68,14 @@ Registration is **email-based**. Only registered users can leave comments on pos
 
 <img src="docs/images/homepage_anonymous.png" alt="Homepage Anonymous" width="600"/>
 
+<br>
+
 **Superusers** see additional features:
-- A **`+`** button to create a new post.
+- A `+` button to create a new post.
 - A **tool panel** under each post with:
-  - **`arrows buttons`** (to move post)
-  - **`edit button`**
-  - **`delete button`**
+  - `arrows buttons` (to move post)
+  - `edit button`
+  - `delete button`
 
 <img src="docs/images/homepage_super_user.png" alt="Homepage Superuser" width="600"/>
 
@@ -83,13 +86,17 @@ Registration is **email-based**. Only registered users can leave comments on pos
 
 <img src="docs/images/post_content_anonymous.png" alt="Post Detail Anonymous" width="600"/>
 
-**Authenticated** users (not superusers) see a **`comment form`**.
+<br>
+
+**Authenticated** users (not superusers) see a `comment form`.
 
 <img src="docs/images/post_content_just_user.png" alt="Post Detail Authenticated Users" width="600"/>
 
-**Superusers** have access to the **`Block Creation Panel`**, enabling them to create post content using **`blocks`**. They can also move blocks **up** or **down** using **`arrow buttons`**, and remove blocks with the **`delete button`**.
+<br>
 
-Available **`block` types** (each with customization options):
+**Superusers** have access to the `Block Creation Panel`, enabling them to create post content using `blocks`. They can also move blocks **up** or **down** using `arrow buttons`, and remove blocks with the `delete button`.
+
+Available `block` types (each with customization options):
 - Text
 - Image
 - Space
@@ -102,7 +109,7 @@ Available **`block` types** (each with customization options):
 **Authenticated** users can comment and **delete their own comments**.
 **Superusers** can **delete any** comment across the entire application.
 
-For example, Alex is authenticated and can see the delete button for his own comment:
+For example, **Alex** is authenticated and can see the delete button for his own comment:
 
 <img src="docs/images/comments.png" alt="Post Detail Comments" width="600"/>
 
