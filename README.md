@@ -28,6 +28,8 @@ The app is fully deployed on AWS and optimized for performance, security, and ma
 
 ## Deployed on AWS
 
+### [mykytaso.com](https://mykytaso.com)
+
 The application is fully deployed on AWS using the following services:<br>
 - **EC2** – Hosts the Ubuntu server running the application with NGINX and Gunicorn
 - **RDS** – Handles the PostgreSQL database
