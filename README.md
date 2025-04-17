@@ -17,13 +17,12 @@ The app is fully deployed on AWS and optimized for performance, security, and ma
 
 ## Technologies
 
-- **Django**
-- **PostgreSQL**
+- **Django 5.2**
+- **PostgreSQL 17.2**
 - **Django Signals** – Used for deleting media files from AWS S3 Bucket and sending Telegram notifications
 - **GenericForeignKey** – Enables the Post model to connect with different block types
 - **HTML, CSS, Bootstrap 5.3, Django Template Language (DTL)**
 - **NGINX, Gunicorn**
-- 
 
 <br>
 
@@ -64,14 +63,15 @@ The application features a Telegram bot that sends notifications for:
 ## Functionality overview
 
 ### Registration and Login
-Registration is **email-based**. Only registered users can leave comments on posts.
+Registration is **email-based**.<br>
+Only registered users can leave comments on posts.
 
 <img src="docs/images/logit_register.png" alt="Login Register" width="600"/>
 
 <br>
 
 ### Posts List Page (Homepage)
-**Anonymous** and **authenticated** users (not superusers) see this basic view:
+**Anonymous** and **Authenticated** users see this basic view:
 
 <img src="docs/images/homepage_anonymous.png" alt="Homepage Anonymous" width="600"/>
 
@@ -80,7 +80,7 @@ Registration is **email-based**. Only registered users can leave comments on pos
 **Superusers** see additional features:
 - A `+` button to create a new post.
 - A **tool panel** under each post with:
-  - `arrows buttons` (to move post)
+  - `arrows buttons` (to reorder posts)
   - `edit button`
   - `delete button`
 
@@ -95,7 +95,7 @@ Registration is **email-based**. Only registered users can leave comments on pos
 
 <br>
 
-**Authenticated** users (not superusers) see a `comment form`.
+**Authenticated** users can leave comments using the `comment form`.
 
 <img src="docs/images/post_content_just_user.png" alt="Post Detail Authenticated Users" width="600"/>
 
