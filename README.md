@@ -4,25 +4,32 @@
 ## My personal website — built with Django and deployed on AWS.
 
 A blog-style web application built with Django.
-It supports user registration, post creation via content blocks, commenting, and real-time Telegram notifications.
+
+It supports:
+- Email-based user registration.
+- Content creation through customizable blocks (inspired by Notion).
+- Commenting by authenticated users.
+- Real-time Telegram notifications.
+
 The app is fully deployed on AWS and optimized for performance, security, and maintainability.
 
 <br>
 
+## Technologies
 
-## Frontend Technologies
-
-- **HTML**
-- **CSS**
-- **Bootstrap 5.3** – for responsive design and UI components
-- **Django Template Language (DTL)** – for rendering dynamic server-side content
+- **Django**
+- **PostgreSQL**
+- **Django Signals** – Used for deleting media files from AWS S3 Bucket and sending Telegram notifications
+- **GenericForeignKey** – Enables the Post model to connect with different block types
+- **HTML, CSS, Bootstrap 5.3, Django Template Language (DTL)**
+- **NGINX, Gunicorn**
+- 
 
 <br>
 
 ## Deployed on AWS
 
-The application is fully deployed on AWS using the following services:
-
+The application is fully deployed on AWS using the following services:<br>
 - **EC2** – Hosts the Ubuntu server running the application with NGINX and Gunicorn
 - **RDS** – Handles the PostgreSQL database
 - **S3 Bucket** – Stores uploaded media files
@@ -94,19 +101,22 @@ Registration is **email-based**. Only registered users can leave comments on pos
 
 <br>
 
-**Superusers** have access to the `Block Creation Panel`, enabling them to create post content using `blocks`. They can also move blocks **up** or **down** using `arrow buttons`, and remove blocks with the `delete button`.
+**Superusers** have access to the `Block Creation Panel`, enabling them to create post content using `blocks`. They can also reorder `blocks` using **up** or **down** `arrow buttons`, and remove `blocks` with the `delete button`.<br>
+I was inspired by Notion’s block-based system and wanted to implement a similar approach. 
 
 Available `block` types (each with customization options):
 - Text
 - Image
 - Space
 
+**Superusers** can also add `tags` just below the post title. When multiple `tags` are present, they’re separated by a `•` symbol for better readability.
+
 <img src="docs/images/post_content_super_user.png" alt="Post Detail Superusers" width="600"/>
 
 <br>
 
 ### Comments
-**Authenticated** users can comment and **delete their own comments**.
+**Authenticated** users can comment and **delete their own comments**.<br>
 **Superusers** can **delete any** comment across the entire application.
 
 For example, **Alex** is authenticated and can see the delete button for his own comment:
