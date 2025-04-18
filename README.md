@@ -22,7 +22,7 @@ The app is fully deployed on AWS and optimized for performance, security, and ma
 - **Django Signals** – Used for deleting media files from AWS S3 Bucket and sending Telegram notifications
 - **GenericForeignKey** – Enables the Post model to connect with different block types
 - **HTML, CSS, Bootstrap 5.3, Django Template Language (DTL)**
-- **NGINX, Gunicorn**
+- **AWS, NGINX, Gunicorn**
 
 <br>
 
@@ -58,7 +58,7 @@ The application features a Telegram bot that sends notifications for:
 - User registrations
 - New comments on posts
 
-<img src="docs/images/telegram.png" alt="Telegram Bot" width="200"/>
+<img src="docs/images/telegram.png" alt="Telegram Bot" width="260"/>
 
 <br>
 
@@ -73,14 +73,14 @@ The application features a Telegram bot that sends notifications for:
 Registration is **email-based**.<br>
 Only registered users can leave comments on posts.
 
-<img src="docs/images/logit_register.png" alt="Login Register" width="600"/>
+<img src="docs/images/logit_register.png" alt="Login Register" width="680"/>
 
 <br>
 
 ### Posts List Page (Homepage)
 **Anonymous** and **Authenticated** users see this basic view:
 
-<img src="docs/images/homepage_anonymous.png" alt="Homepage Anonymous" width="600"/>
+<img src="docs/images/homepage_anonymous.png" alt="Homepage Anonymous" width="680"/>
 
 <br>
 
@@ -91,20 +91,20 @@ Only registered users can leave comments on posts.
   - `edit button`
   - `delete button`
 
-<img src="docs/images/homepage_super_user.png" alt="Homepage Superuser" width="600"/>
+<img src="docs/images/homepage_super_user.png" alt="Homepage Superuser" width="680"/>
 
 <br>
 
 ### Post Detail Page (Post Content Page)
 **Anonymous** users can view comments but must log in to leave one:
 
-<img src="docs/images/post_content_anonymous.png" alt="Post Detail Anonymous" width="600"/>
+<img src="docs/images/post_content_anonymous.png" alt="Post Detail Anonymous" width="680"/>
 
 <br>
 
 **Authenticated** users can leave comments using the `comment form`.
 
-<img src="docs/images/post_content_just_user.png" alt="Post Detail Authenticated Users" width="600"/>
+<img src="docs/images/post_content_just_user.png" alt="Post Detail Authenticated Users" width="680"/>
 
 <br>
 
@@ -118,7 +118,7 @@ Available `block` types (each with customization options):
 
 **Superusers** can also add `tags` just below the post title. When multiple `tags` are present, they’re separated by a `•` symbol for better readability.
 
-<img src="docs/images/post_content_super_user.png" alt="Post Detail Superusers" width="600"/>
+<img src="docs/images/post_content_super_user.png" alt="Post Detail Superusers" width="680"/>
 
 <br>
 
@@ -128,7 +128,7 @@ Available `block` types (each with customization options):
 
 For example, **Alex** is authenticated and can see the delete button for his own comment:
 
-<img src="docs/images/comments.png" alt="Post Detail Comments" width="600"/>
+<img src="docs/images/comments.png" alt="Post Detail Comments" width="680"/>
 
 <br>
 
