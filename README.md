@@ -62,6 +62,11 @@ The application features a Telegram bot that sends notifications for:
 
 <br>
 
+## Database Diagram
+<img src="docs/images/database_diagram.png" alt="Database Diagram">
+
+<br>
+
 ## Functionality overview
 
 ### Registration and Login
