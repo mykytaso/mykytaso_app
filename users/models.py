@@ -54,8 +54,8 @@ class User(AbstractUser):
 
 
 @receiver(post_save, sender=get_user_model())
-def create_family_for_user(sender, instance, created, **kwargs):
+def new_user_created_telegram_notification(sender, instance, created, **kwargs):
     if created:
         send_telegram_message(
-            f"<b>New User</b>\n⏱️{(now() - timedelta(hours=4)).strftime('%Y-%m-%d %H:%M:%S')}\n📧{instance.email}"
+            f"<b>New User</b>\n⏱️{(now() - timedelta(hours=4)).strftime('%Y-%m-%d %H:%M:%S')}\n📧 {instance.email}"
         )
