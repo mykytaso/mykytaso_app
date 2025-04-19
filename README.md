@@ -7,7 +7,7 @@ A blog-style web application built with Django.
 
 It supports:
 - Email-based user registration.
-- Content creation through customizable blocks (inspired by Notion).
+- Content creation through customizable blocks (inspired by Notion block-based system).
 - Commenting by authenticated users.
 - Real-time Telegram notifications.
 
@@ -23,6 +23,12 @@ The app is fully deployed on AWS and optimized for performance, security, and ma
 - **GenericForeignKey** – Enables the Post model to connect with different block types
 - **HTML, CSS, Bootstrap 5.3, Django Template Language (DTL)**
 - **AWS, NGINX, Gunicorn**
+
+<br>
+
+## Project Demo
+
+Quick video overview available on **[YouTube](https://youtu.be/jxs3eklqF5U)**
 
 <br>
 
