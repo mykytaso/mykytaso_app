@@ -1,17 +1,17 @@
 # 👾 mykytaso.com
 
 
-## My personal website — built with Django and deployed on AWS.
+## My Blog-Style Website — Built with Django and Deployed on AWS
 
-A blog-style web application built with Django.
-
-It supports:
+**Key Features:**
+- Content creation using customizable blocks (inspired by Notion’s block-based system).
 - Email-based user registration.
-- Content creation through customizable blocks (inspired by Notion block-based system).
-- Commenting by authenticated users.
+- Commenting for authenticated users.
 - Real-time Telegram notifications.
 
-The app is fully deployed on AWS and optimized for performance, security, and maintainability.
+<br>
+
+Quick video overview available on **[YouTube](https://youtu.be/jxs3eklqF5U)**
 
 <br>
 
@@ -20,15 +20,9 @@ The app is fully deployed on AWS and optimized for performance, security, and ma
 - **Django 5.2**
 - **PostgreSQL 17.2**
 - **Django Signals** – Used for deleting media files from AWS S3 Bucket and sending Telegram notifications
-- **GenericForeignKey** – Enables the Post model to connect with different block types
+- **GenericForeignKey** – Allows each Block to represent a different type of content, like text, image, or space
 - **HTML, CSS, Bootstrap 5.3, Django Template Language (DTL)**
 - **AWS, NGINX, Gunicorn**
-
-<br>
-
-## Project Demo
-
-Quick video overview available on **[YouTube](https://youtu.be/jxs3eklqF5U)**
 
 <br>
 
@@ -52,7 +46,8 @@ Secure HTTPS is enabled using SSL/TLS certificates provided by `Let’s Encrypt`
 <br>
 
 ## Unit and Integration Testing
-The project achieves **94% test coverage**, ensuring strong code reliability and stability.
+I implemented extensive unit and integration tests with `Unittest`.<br>
+Current test coverage is **94%**.
 
 <img src="docs/images/test_coverage.png" alt="Unit and Integration Testing" width="400"/>
 
@@ -114,7 +109,8 @@ Only registered users can leave comments on posts.
 
 <br>
 
-**Superusers** have access to the `Block Creation Panel`, enabling them to create post content using `blocks`. They can also reorder `blocks` using **up** or **down** `arrow buttons`, and remove `blocks` with the `delete button`.<br>
+**Superusers** have access to the `Block Creation Panel`, enabling them to create post content using `blocks`.<br>
+They can also reorder `blocks` using **up** or **down** `arrow buttons`, and remove `blocks` with the `delete button`.<br>
 I was inspired by Notion’s block-based system and wanted to implement a similar approach. 
 
 Available `block` types (each with customization options):
