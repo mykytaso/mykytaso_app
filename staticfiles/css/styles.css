@@ -45,22 +45,27 @@ body {
 
 #text_title_h1 {
     font-size: 2.5em;
+    font-weight: bold;
 }
 
 #text_title_h2 {
     font-size: 2em;
+    font-weight: bold;
 }
 
 #text_title_h3 {
     font-size: 1.75em;
+    font-weight: bold;
 }
 
 #text_title_h4 {
     font-size: 1.5em;
+    font-weight: bold;
 }
 
 #text_title_h5 {
     font-size: 1.25em;
+    font-weight: bold;
 }
 
 .cls-color {
