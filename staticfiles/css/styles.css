@@ -28,11 +28,39 @@ body {
     border-radius: 16px;
 }
 
-#image_description_text {
+#text_image_description {
     color: #6d6d6d;
     font-style: italic;
     font-size: 15px;
     margin-top: 10px;
+}
+
+#text_bold {
+    font-weight: bold;
+}
+
+#text_italic {
+    font-style: italic;
+}
+
+#text_title_h1 {
+    font-size: 2.5em;
+}
+
+#text_title_h2 {
+    font-size: 2em;
+}
+
+#text_title_h3 {
+    font-size: 1.75em;
+}
+
+#text_title_h4 {
+    font-size: 1.5em;
+}
+
+#text_title_h5 {
+    font-size: 1.25em;
 }
 
 .cls-color {
@@ -44,9 +72,3 @@ body {
     width: 125px;
 }
 
-
-/*.card:hover {*/
-/*    transform: translateY(-5px);*/
-/*    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);*/
-/*    transition: 0.3s;*/
-/*}*/
