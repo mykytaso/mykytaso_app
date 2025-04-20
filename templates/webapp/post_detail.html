@@ -88,7 +88,7 @@
             <!-- Render Text -->
             {% if block.content_object.text %}
                 <div class="{{ block.content_object.text_alignment }}" id="{{ block.content_object.text_type }}">
-                  {{ block.content_object.text }}
+                  {{ block.content_object.text|urlize }}
                 </div>
 
             <!-- Render Image -->
