@@ -99,7 +99,11 @@
 
             <!-- Render Space -->
             {% elif block.content_object.space_number %}
-              <div style="height: {{ block.content_object.space_number }}px;"></div>
+              <div style="height: {{ block.content_object.space_number }}px;" class="text-center">
+              {% if user.is_staff %}
+                <span class="text-secondary fw-lighter text-center align-items-center">Space: {{ block.content_object.space_number }} px</span>
+              {% endif %}
+              </div>
             {% endif %}
           </div>
 
