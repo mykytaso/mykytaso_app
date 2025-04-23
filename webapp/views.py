@@ -106,7 +106,7 @@ class PostDetailView(generic.DetailView):
 
     def get_queryset(self):
         return Post.objects.prefetch_related(
-            "comments__author", "blocks__content_object"
+            "comments__author", "blocks__content_object", "tags"
         )
 
 
