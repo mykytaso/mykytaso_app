@@ -1,13 +1,13 @@
 # 👾 mykytaso.com
 
 
-## My Blog-Style Website — Built with Django and Deployed on AWS
+## My Django-based blog running on AWS
 
 **Key Features:**
-- Content creation using customizable blocks (inspired by Notion’s block-based system).
-- Email-based user registration.
-- Commenting for authenticated users.
-- Real-time Telegram notifications.
+- Content creation using customizable blocks (inspired by Notion’s block-based system)
+- Email-based user registration
+- Commenting for authenticated users
+- Real-time Telegram notifications
 
 <br>
 
