@@ -28,7 +28,7 @@ Quick video overview available on **[YouTube](https://youtu.be/jxs3eklqF5U)**
 
 ## Deployed on AWS
 
-### [mykytaso.com](https://mykytaso.com)
+### 🔗 [mykytaso.com](https://mykytaso.com)
 
 The application is fully deployed on AWS using the following services:<br>
 - **EC2** – Hosts the Ubuntu server running the application with NGINX and Gunicorn
