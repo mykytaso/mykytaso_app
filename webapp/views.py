@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.aggregates import Max
 from django.http import HttpResponseForbidden, HttpResponseBadRequest
