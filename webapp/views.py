@@ -104,6 +104,11 @@ class PostDetailView(generic.DetailView):
     model = Post
     template_name = "webapp/post_detail.html"
 
+    def get_queryset(self):
+        return Post.objects.prefetch_related(
+            "comments__author", "blocks__content_object"
+        )
+
 
 class BlockCreateView(SuperuserRequiredMixin, View):
     def post(self, request, pk):
