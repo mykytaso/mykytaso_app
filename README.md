@@ -78,6 +78,15 @@ Only registered users can leave comments on posts.
 
 <br>
 
+All users can:
+- Change their password
+- Edit their username
+- Update their email address
+
+<img src="docs/images/user_info.png" alt="Login Register" width="680"/>
+
+<br>
+
 ### Posts List Page (Homepage)
 **Anonymous** and **Authenticated** users see this basic view:
 
