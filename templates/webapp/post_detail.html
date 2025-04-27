@@ -151,7 +151,7 @@
             <div class="col-auto mb-2">
               <span class="fw-bold">
                 <i class="bi bi-person-fill"></i>
-                {{ comment.author.email | email_username }}&nbsp; &nbsp;
+                {{ comment.author.username }}&nbsp; &nbsp;
               </span>
               <span class="text-secondary fw-light">
                 {{ comment.created_at|minus_hours:4|date:"d M Y" }} at
