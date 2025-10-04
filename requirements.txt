@@ -6,7 +6,7 @@ cffi==1.17.1
 charset-normalizer==3.4.1
 crispy-bootstrap5==2025.4
 cryptography==44.0.2
-Django==5.2
+Django==5.2.7
 django-crispy-forms==2.3
 django-debug-toolbar==5.1.0
 django-recaptcha==4.1.0
